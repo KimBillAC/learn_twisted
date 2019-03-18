@@ -1,7 +1,8 @@
 from twisted.internet import reactor
 from twisted.web.resource import Resource, NoResource
 from twisted.web.server import Site
-
+from twisted.web.util import redirectTo
+from datetime import datetime
 from calendar import calendar
 
 
@@ -25,7 +26,7 @@ class CalendarHome(Resource):
             return NoResource()
 
     def render_GET(self, request):
-        return '<html><body><pre>Welcome to calendar page!</pre></body></html>'.encode()
+        return redirectTo(str(datetime.now().year).encode(), request)
 
 
 root = CalendarHome()
